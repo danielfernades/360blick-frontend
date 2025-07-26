@@ -6,6 +6,12 @@ import { StatusBar } from 'expo-status-bar';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, View } from 'react-native';
 
+// Context
+import { ToastProvider, useToast } from './src/context/ToastContext';
+
+// Components
+import Toast from './src/components/Toast';
+
 // Screens
 import HomeScreen from './src/screens/HomeScreen';
 import SearchScreen from './src/screens/SearchScreen';
@@ -52,7 +58,9 @@ function TabNavigator() {
   );
 }
 
-export default function App() {
+function AppContent() {
+  const { toast, hideToast } = useToast();
+
   return (
     <View style={styles.container}>
       <StatusBar style="light" backgroundColor="#000000" />
@@ -67,7 +75,21 @@ export default function App() {
           <Stack.Screen name="MovieDetail" component={MovieDetailScreen} />
         </Stack.Navigator>
       </NavigationContainer>
+      <Toast
+        visible={toast.visible}
+        message={toast.message}
+        type={toast.type}
+        onHide={hideToast}
+      />
     </View>
+  );
+}
+
+export default function App() {
+  return (
+    <ToastProvider>
+      <AppContent />
+    </ToastProvider>
   );
 }
 

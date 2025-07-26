@@ -17,11 +17,13 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import StreamingService from '../services/streamingService';
 import UserService from '../services/userService';
 import ServiceCard from '../components/ServiceCard';
+import { useToast } from '../context/ToastContext';
 
 const MovieDetailScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const { content: initialContent } = route.params;
+  const { showSuccess, showError } = useToast();
 
   const [content, setContent] = useState(initialContent);
   const [isInWatchlist, setIsInWatchlist] = useState(false);
@@ -65,13 +67,17 @@ const MovieDetailScreen = () => {
       const success = await UserService.removeFromWatchlist(content.id);
       if (success) {
         setIsInWatchlist(false);
-        Alert.alert('Removido', 'Removido da sua watchlist');
+        showSuccess('Removido da sua watchlist');
+      } else {
+        showError('Erro ao remover da watchlist');
       }
     } else {
       const success = await UserService.addToWatchlist(content);
       if (success) {
         setIsInWatchlist(true);
-        Alert.alert('Adicionado', 'Adicionado à sua watchlist');
+        showSuccess('Adicionado à sua watchlist');
+      } else {
+        showError('Erro ao adicionar à watchlist');
       }
     }
   };

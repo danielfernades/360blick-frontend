@@ -18,6 +18,7 @@ import StreamingService from '../services/streamingService';
 import UserService from '../services/userService';
 import ServiceCard from '../components/ServiceCard';
 import ContentCard from '../components/ContentCard';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const { width } = Dimensions.get('window');
 
@@ -169,6 +170,7 @@ const HomeScreen = () => {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.loadingContainer}>
+          <LoadingSpinner size={60} />
           <Text style={styles.loadingText}>Carregando...</Text>
         </View>
       </SafeAreaView>
@@ -245,6 +247,7 @@ const styles = StyleSheet.create({
   loadingText: {
     color: '#FFFFFF',
     fontSize: 16,
+    marginTop: 16,
   },
   welcomeContainer: {
     margin: 16,

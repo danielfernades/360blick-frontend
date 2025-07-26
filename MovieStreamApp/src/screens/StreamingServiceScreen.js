@@ -17,11 +17,13 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import StreamingService from '../services/streamingService';
 import UserService from '../services/userService';
 import ContentCard from '../components/ContentCard';
+import { useToast } from '../context/ToastContext';
 
 const StreamingServiceScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const { service: initialService } = route.params;
+  const { showSuccess, showError } = useToast();
 
   const [service, setService] = useState(initialService);
   const [availableContent, setAvailableContent] = useState([]);
@@ -59,20 +61,24 @@ const StreamingServiceScreen = () => {
       const success = await UserService.removeServiceFromProfile(service.id);
       if (success) {
         setIsInProfile(false);
-        Alert.alert('Removido', 'Serviço removido do seu perfil');
+        showSuccess('Serviço removido do seu perfil');
+      } else {
+        showError('Erro ao remover serviço');
       }
     } else {
       const success = await UserService.addServiceToProfile(service);
       if (success) {
         setIsInProfile(true);
-        Alert.alert('Adicionado', 'Serviço adicionado ao seu perfil');
+        showSuccess('Serviço adicionado ao seu perfil');
+      } else {
+        showError('Erro ao adicionar serviço');
       }
     }
   };
 
   const handleOpenService = () => {
     Linking.openURL(service.url).catch(() => {
-      Alert.alert('Erro', 'Não foi possível abrir o link');
+      showError('Não foi possível abrir o link');
     });
   };
 

@@ -17,9 +17,11 @@ import { useNavigation } from '@react-navigation/native';
 import UserService from '../services/userService';
 import ServiceCard from '../components/ServiceCard';
 import ContentCard from '../components/ContentCard';
+import { useToast } from '../context/ToastContext';
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
+  const { showSuccess, showError } = useToast();
   const [userProfile, setUserProfile] = useState(null);
   const [userServices, setUserServices] = useState([]);
   const [watchlist, setWatchlist] = useState([]);
@@ -74,8 +76,10 @@ const ProfileScreen = () => {
           onPress: async () => {
             const success = await UserService.clearUserData();
             if (success) {
-              Alert.alert('Sucesso', 'Dados limpos com sucesso!');
+              showSuccess('Dados limpos com sucesso!');
               loadUserData();
+            } else {
+              showError('Erro ao limpar dados');
             }
           },
         },

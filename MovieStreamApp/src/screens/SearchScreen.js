@@ -17,6 +17,8 @@ import { useNavigation } from '@react-navigation/native';
 import StreamingService from '../services/streamingService';
 import ServiceCard from '../components/ServiceCard';
 import ContentCard from '../components/ContentCard';
+import LoadingSpinner from '../components/LoadingSpinner';
+import { useDebounce } from '../hooks/useDebounce';
 
 const { width } = Dimensions.get('window');
 
@@ -29,6 +31,9 @@ const SearchScreen = () => {
   const [loading, setLoading] = useState(false);
   const [allServices, setAllServices] = useState([]);
   const [allContent, setAllContent] = useState([]);
+  
+  // Debounce search query to avoid excessive API calls
+  const debouncedSearchQuery = useDebounce(searchQuery, 500);
 
   const filters = [
     { id: 'all', name: 'Tudo', icon: 'grid' },
@@ -52,13 +57,13 @@ const SearchScreen = () => {
   }, []);
 
   useEffect(() => {
-    if (searchQuery.length > 0) {
+    if (debouncedSearchQuery.length > 0) {
       performSearch();
     } else {
       setContentResults([]);
       setServiceResults([]);
     }
-  }, [searchQuery, activeFilter]);
+  }, [debouncedSearchQuery, activeFilter]);
 
   const loadInitialData = async () => {
     try {
@@ -74,17 +79,17 @@ const SearchScreen = () => {
   };
 
   const performSearch = async () => {
-    if (searchQuery.trim().length < 2) return;
+    if (debouncedSearchQuery.trim().length < 2) return;
 
     setLoading(true);
     try {
       if (activeFilter === 'all' || activeFilter === 'services') {
-        const services = await StreamingService.searchServices(searchQuery);
+        const services = await StreamingService.searchServices(debouncedSearchQuery);
         setServiceResults(services);
       }
       
       if (activeFilter === 'all' || activeFilter === 'content') {
-        const content = await StreamingService.searchContent(searchQuery);
+        const content = await StreamingService.searchContent(debouncedSearchQuery);
         setContentResults(content);
       }
     } catch (error) {
@@ -273,6 +278,7 @@ const SearchScreen = () => {
     if (loading) {
       return (
         <View style={styles.loadingContainer}>
+          <LoadingSpinner size={40} />
           <Text style={styles.loadingText}>Buscando...</Text>
         </View>
       );
@@ -454,6 +460,7 @@ const styles = StyleSheet.create({
   loadingText: {
     color: '#8E8E8E',
     fontSize: 16,
+    marginTop: 12,
   },
   emptyContainer: {
     flex: 1,
