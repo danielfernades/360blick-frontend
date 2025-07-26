@@ -18,7 +18,9 @@ import StreamingService from '../services/streamingService';
 import ServiceCard from '../components/ServiceCard';
 import ContentCard from '../components/ContentCard';
 import LoadingSpinner from '../components/LoadingSpinner';
+import AdBanner from '../components/AdBanner';
 import { useDebounce } from '../hooks/useDebounce';
+import { AdMobIds } from '../constants/ads';
 
 const { width } = Dimensions.get('window');
 
@@ -298,6 +300,14 @@ const SearchScreen = () => {
 
     return (
       <ScrollView style={styles.resultsContainer}>
+        {/* Banner Ad nos resultados */}
+        {(serviceResults.length > 0 || contentResults.length > 0) && (
+          <AdBanner 
+            adUnitId={AdMobIds.BANNER_SEARCH} 
+            style={styles.searchAdBanner}
+          />
+        )}
+
         {serviceResults.length > 0 && (
           <View style={styles.resultSection}>
             <Text style={styles.resultTitle}>
@@ -499,6 +509,10 @@ const styles = StyleSheet.create({
   },
   contentGrid: {
     paddingHorizontal: 16,
+  },
+  searchAdBanner: {
+    marginHorizontal: 16,
+    marginBottom: 8,
   },
 });
 

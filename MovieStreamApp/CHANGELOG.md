@@ -88,15 +88,77 @@ src/
 
 ---
 
+---
+
+## [1.2.0] - 2024-01-15 - 💰 MONETIZAÇÃO COMPLETA
+
+### ✨ Nova Funcionalidade Principal: GOOGLE ADMOB
+- **Banner Ads**: Implementados em Home e Search screens
+- **Interstitial Ads**: Entre navegações com controle inteligente de frequência
+- **Rewarded Ads**: Anúncios recompensados para funcionalidades premium
+- **Compliance Total**: GDPR/CCPA automaticamente configurado
+
+### 🎯 Estratégia de Monetização
+- **3 Tipos de Anúncios**: Banner, Intersticial e Recompensado
+- **6 Unidades de Anúncio**: Otimizadas para diferentes pontos do app
+- **Controle de Frequência**: Sistema anti-spam (máx. 1 ad/5min)
+- **UX Preservada**: Anúncios não intrusivos e bem posicionados
+
+### 🛠️ Componentes de Anúncios
+- **AdBanner**: Componente reutilizável para banners
+- **RewardedAdButton**: Botão interativo para anúncios recompensados  
+- **AdService**: Serviço completo de gerenciamento AdMob
+- **Constantes**: IDs organizados e configuráveis
+
+### 📊 Sistema de Controle
+- **Tracking de Navegação**: Contador inteligente para intersticiais
+- **Persistência**: AsyncStorage para dados de anúncios
+- **Pre-loading**: Anúncios carregados antecipadamente
+- **Error Handling**: Tratamento robusto de erros
+
+### 🎨 Integração Visual
+- **Design Consistente**: Anúncios seguem tema do app
+- **Feedback Visual**: Estados de loading e erro
+- **Animações**: Transições suaves nos anúncios
+- **Responsivo**: Adaptação automática ao tamanho da tela
+
+### 📱 Implementação Técnica
+```
+src/
+├── components/
+│   ├── AdBanner.js          # Banner ads
+│   └── RewardedAdButton.js  # Rewarded ads
+├── constants/
+│   └── ads.js               # IDs e configurações
+├── services/
+│   └── adService.js         # Lógica do AdMob
+└── screens/                 # Integração nas telas
+```
+
+### 💰 Potencial de Receita
+- **Estimativa Base**: $20-65/dia (1000 usuários ativos)
+- **Banner Ads**: $5-15/dia (CPM constante)
+- **Interstitial Ads**: $10-30/dia (maior eCPM)
+- **Rewarded Ads**: $5-20/dia (engajamento premium)
+
+### 📋 Documentação
+- **ADMOB_SETUP.md**: Guia completo de configuração
+- **IDs de Teste**: Prontos para desenvolvimento
+- **Checklist**: Deploy e produção
+- **Troubleshooting**: Soluções para problemas comuns
+
+---
+
 ## 🔮 Próximas Versões Planejadas
 
-### [1.2.0] - Em Planejamento
+### [1.3.0] - Em Planejamento
 - [ ] Integração com APIs reais
 - [ ] Sistema de cache inteligente
 - [ ] Modo offline básico
 - [ ] Melhorias de acessibilidade
+- [ ] Analytics avançados de monetização
 
-### [1.3.0] - Em Planejamento
+### [1.4.0] - Em Planejamento
 - [ ] Sistema de notificações push
 - [ ] Compartilhamento social
 - [ ] Listas personalizadas

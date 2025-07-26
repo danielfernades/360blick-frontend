@@ -19,6 +19,10 @@ import UserService from '../services/userService';
 import ServiceCard from '../components/ServiceCard';
 import ContentCard from '../components/ContentCard';
 import LoadingSpinner from '../components/LoadingSpinner';
+import AdBanner from '../components/AdBanner';
+import RewardedAdButton from '../components/RewardedAdButton';
+import { AdMobIds } from '../constants/ads';
+import adService from '../services/adService';
 
 const { width } = Dimensions.get('window');
 
@@ -67,7 +71,13 @@ const HomeScreen = () => {
   };
 
   const handleContentPress = (content) => {
+    adService.incrementNavigationCount();
     navigation.navigate('MovieDetail', { content });
+  };
+
+  const handleRewardedAdEarned = () => {
+    // Dar recompensa ao usuário (exemplo: desbloquear conteúdo premium)
+    console.log('Recompensa ganha! Usuário pode ter benefícios extras.');
   };
 
   const renderServiceCard = ({ item }) => (
@@ -193,6 +203,9 @@ const HomeScreen = () => {
         <WelcomeHeader />
         <QuickStats />
 
+        {/* Banner Ad no topo */}
+        <AdBanner adUnitId={AdMobIds.BANNER_HOME} />
+
         {userServices.length > 0 && (
           <CategoryFilter
             title="Seus Serviços"
@@ -206,6 +219,16 @@ const HomeScreen = () => {
           data={popularContent.slice(0, 10)}
           renderItem={renderContentCard}
         />
+
+        {/* Anúncio Recompensado */}
+        <View style={styles.rewardedAdContainer}>
+          <RewardedAdButton
+            title="Desbloquear Conteúdo Premium"
+            subtitle="Assista um anúncio e ganhe acesso especial"
+            icon="star"
+            onRewardEarned={handleRewardedAdEarned}
+          />
+        </View>
 
         <CategoryFilter
           title="Serviços Recomendados"
@@ -336,6 +359,10 @@ const styles = StyleSheet.create({
   },
   bottomSpacing: {
     height: 100,
+  },
+  rewardedAdContainer: {
+    paddingHorizontal: 16,
+    marginVertical: 8,
   },
 });
 

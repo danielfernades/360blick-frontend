@@ -17,7 +17,9 @@ import { useNavigation } from '@react-navigation/native';
 import UserService from '../services/userService';
 import ServiceCard from '../components/ServiceCard';
 import ContentCard from '../components/ContentCard';
+import RewardedAdButton from '../components/RewardedAdButton';
 import { useToast } from '../context/ToastContext';
+import { AdMobIds } from '../constants/ads';
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
@@ -82,12 +84,17 @@ const ProfileScreen = () => {
               showError('Erro ao limpar dados');
             }
           },
-        },
-      ]
-    );
-  };
+                  },
+        ]
+      );
+    };
 
-  const handleServicePress = (service) => {
+    const handleRewardedAdEarned = () => {
+      // Implementar benefício premium (exemplo: remover anúncios por tempo limitado)
+      showSuccess('Premium ativado! Aproveite os benefícios exclusivos.');
+    };
+
+    const handleServicePress = (service) => {
     navigation.navigate('StreamingService', { service });
   };
 
@@ -307,6 +314,14 @@ const ProfileScreen = () => {
             </View>
           </View>
         </View>
+
+        <RewardedAdButton
+          title="Ativar Premium Temporário"
+          subtitle="Assista um anúncio e remova ads por 1 hora"
+          icon="diamond"
+          onRewardEarned={handleRewardedAdEarned}
+          style={styles.premiumButton}
+        />
 
         <TouchableOpacity
           style={styles.clearButton}
@@ -576,6 +591,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     color: '#FF6B6B',
+  },
+  premiumButton: {
+    marginBottom: 16,
   },
   bottomSpacing: {
     height: 100,

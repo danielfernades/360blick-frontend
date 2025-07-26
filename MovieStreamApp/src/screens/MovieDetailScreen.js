@@ -18,6 +18,8 @@ import StreamingService from '../services/streamingService';
 import UserService from '../services/userService';
 import ServiceCard from '../components/ServiceCard';
 import { useToast } from '../context/ToastContext';
+import { AdMobIds } from '../constants/ads';
+import adService from '../services/adService';
 
 const MovieDetailScreen = () => {
   const navigation = useNavigation();
@@ -35,6 +37,13 @@ const MovieDetailScreen = () => {
     loadContentDetails();
     checkIfInWatchlist();
     loadUserServices();
+    
+    // Tentar mostrar anúncio intersticial ao entrar na tela
+    const showInterstitialAd = async () => {
+      await adService.showInterstitialAd(AdMobIds.INTERSTITIAL_MOVIE_DETAILS);
+    };
+    
+    showInterstitialAd();
   }, []);
 
   const loadContentDetails = async () => {

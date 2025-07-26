@@ -79,6 +79,11 @@ cd MovieStreamApp
 # Instale as dependências
 npm install
 
+# IMPORTANTE: Configure AdMob antes de rodar
+# 1. Leia o arquivo ADMOB_SETUP.md
+# 2. Configure seus IDs reais em src/constants/ads.js
+# 3. Atualize app.json com seus App IDs
+
 # Inicie o servidor de desenvolvimento
 npm start
 ```
@@ -175,6 +180,13 @@ O aplicativo inclui dados de demonstração com:
 
 ## ✅ Melhorias Implementadas
 
+### 💰 **MONETIZAÇÃO COM ADMOB**:
+- **Banner Ads**: Anúncios em Home e Search screens
+- **Interstitial Ads**: Anúncios entre navegações (frequência controlada)
+- **Rewarded Ads**: Anúncios recompensados para funcionalidades premium
+- **Compliance GDPR/CCPA**: Consentimento automático implementado
+- **Controle de Frequência**: Sistema inteligente anti-spam
+
 ### 🎨 UI/UX Avançadas:
 - **Sistema de Toast**: Notificações elegantes em vez de alerts nativos
 - **Loading Spinner Animado**: Indicador de carregamento personalizado
@@ -185,14 +197,16 @@ O aplicativo inclui dados de demonstração com:
 ### 🛠️ Melhorias Técnicas:
 - **Context API**: Gerenciamento global de toast/notificações
 - **Hooks Personalizados**: useDebounce para performance
-- **Componentes Reutilizáveis**: AnimatedCard, LoadingSpinner, Toast
+- **Componentes Reutilizáveis**: AnimatedCard, LoadingSpinner, Toast, AdBanner
 - **Utilitários**: Funções helpers para formatação e validação
 - **Constantes de Tema**: Cores, espaçamentos e tipografia padronizadas
+- **Serviço de Anúncios**: Gerenciamento completo do AdMob
 
 ### 📱 Performance:
 - **Busca Otimizada**: Debounce de 500ms reduz requisições desnecessárias
 - **Animações Nativas**: Usando useNativeDriver para melhor performance
 - **Componentes Lazy**: Carregamento otimizado de componentes
+- **Pre-loading de Anúncios**: Anúncios carregados antecipadamente
 
 ## 🔮 Futuras Melhorias
 
