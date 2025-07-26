@@ -48,3 +48,19 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+## Observações importantes
+
+- Para que a listagem de filmes funcione, obtenha uma chave gratuita da API do TMDB (https://www.themoviedb.org/settings/api) e substitua o valor 'demo' pelo seu valor real em `app/site.tsx` na linha do parâmetro `api_key`.
+- As imagens dos provedores são temporárias, você pode substituir por logos reais em `assets/images`.
+
+## Como rodar o app
+
+1. Instale as dependências:
+   ```bash
+   npm install
+   ```
+2. Rode o app:
+   ```bash
+   npx expo start
+   ```

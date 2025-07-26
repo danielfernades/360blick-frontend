@@ -11,9 +11,9 @@ import { ThemedView } from '@/components/ThemedView';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 
 const SITES = [
-  { id: 'netflix', name: 'Netflix', logo: require('@/assets/images/netflix-logo.png') },
-  { id: 'prime', name: 'Prime Video', logo: require('@/assets/images/prime-logo.png') },
-  { id: 'disney', name: 'Disney+', logo: require('@/assets/images/disney-logo.png') },
+  { id: 'netflix', name: 'Netflix', logo: require('@/assets/images/react-logo.png') },
+  { id: 'prime', name: 'Prime Video', logo: require('@/assets/images/react-logo@2x.png') },
+  { id: 'disney', name: 'Disney+', logo: require('@/assets/images/react-logo@3x.png') },
 ];
 
 export default function ExploreScreen() {
